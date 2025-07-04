@@ -9,7 +9,7 @@ import { dark } from "@clerk/themes";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "trAIn-Personal Career Coach",
+  title: "TrAIn-Personal Career Coach",
   description: "",
 };
 

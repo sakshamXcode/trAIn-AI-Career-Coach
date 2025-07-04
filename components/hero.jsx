@@ -32,7 +32,7 @@ const HeroSection = () => {
         <div className="space-y-6 mx-auto">
           <h1 className="text-5xl font-bold md:text-6xl lg:text-7xl xl:text-8xl gradient-title">
            Industry-Grade Guidance <br />
-           Powered by trAIn
+           Powered by TrAIn
           </h1>
           <p className="mx-auto max-w-[600px] text-muted-foreground md:texxt-xl">
             Boost your Career with personalized guidance, interview prep, and
