@@ -68,36 +68,36 @@ export async function generateMCQQuestions(name) {
   if (!user) throw new Error("User not found");
 
   console.log(name);
-  const prompt = `
-You are a coding assistant helping a user understand the underlying concept of a DSA coding question. Your task is to generate **5 multiple-choice questions (MCQs)** that help a candidate revise and reinforce the **core idea or algorithmic pattern** behind this question.
+const prompt = `
+You are a coding assistant helping users revise the underlying concepts of a Data Structures and Algorithms (DSA) problem. Based on the question title provided below, your task is to generate **5 multiple-choice questions (MCQs)** that reinforce core algorithmic ideas and provide an external study link for each.
 
-Input:
+### Input:
 {
-  "name": ${name}
+  "name": "${name}"
 }
 
-Instructions:
-- Use the coding question title in the input.
-- Each MCQ must test the user’s understanding of that core concept, typical use-cases, time complexity, or decision-making strategies.
-- MCQs should be **clear, concise, and non-repetitive**.
-- Use industry-standard formats and terminology.
-- It should help the user to remember the patterns of that problem and leave a good impact on them.
-- Output must be a clean **JSON object** only (no extra comments or markdown).
+### Guidelines:
+- Focus on **DSA patterns**, **time/space complexity**, **edge cases**, or **common mistakes** related to the problem.
+- MCQs must be **non-repetitive**, clear, and useful for concept reinforcement.
+- Include a **relevant external study link** for each MCQ pointing to GeeksforGeeks, LeetCode Explore, or similar trusted sources.
+- The link should match the MCQ topic as precisely as possible.
+- Ensure the answer matches **exactly** with one of the options (case-sensitive).
+- Output only valid JSON. Do not include any markdown, code blocks, or explanations.
 
-Return format:
-json
+### Output Format:
 {
   "concept_revision": [
     {
-      "question": "<MCQ question text>",
-      "options": ["A <Option 1>", "B <Option 2>", "C <Option 3>", "D <Option 4>"],
-      "answer": "<Correct Option>"
+      "question": "Which data structure is ideal for solving the Two Sum problem?",
+      "options": ["Array", "HashMap", "Stack", "Queue"],
+      "answer": "HashMap",
+      "study_link": "https://www.geeksforgeeks.org/two-sum-problem/"
     },
     ...
-    // total 5 such MCQs
+    // 5 total MCQs
   ]
-}`
-;
+}
+`;
 
   try {
     const results = await model.generateContent(prompt);

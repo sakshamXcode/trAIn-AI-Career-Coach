@@ -16,78 +16,79 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { BarLoader } from "react-spinners";
 
-
 const DsaRevision = () => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const router = useRouter();
-    
-    useEffect(() => {
-        const fetchQuestions = async () => {
-            try {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
         const result = await generateQuestions();
-        console.log(result);
         setData(result?.dsa_interview_preparation);
-    } catch (err) {
+      } catch (err) {
         console.error("Failed to fetch questions", err);
-    } finally {
+      } finally {
         setLoading(false);
-    }
-};
+      }
+    };
 
-fetchQuestions();
-}, []);
+    fetchQuestions();
+  }, []);
 
-if (loading) return 
-<>
-<BarLoader/>
- <p> Hold Onto Your Seats....</p> <br/>  
-</>
+  if (loading) {
+    return (
+      <div className="p-6 text-center">
+        <BarLoader width="100%" color="gray" />
+        <p className="mt-4 text-lg font-semibold text-gray-700">
+          Fetching your DSA challenge set for the day....
+        </p>
+      </div>
+    );
+  }
 
-if (!data) return <p className="p-6 text-red-500">Failed to load data.</p>;
+  if (!data) {
+    return <p className="p-6 text-red-500">Failed to load data.</p>;
+  }
 
-function handleClick (name){
- router.push(`/dsa/mcq?name=${encodeURIComponent(name)}`);
-}
+  const handleClick = (name) => {
+    router.push(`/dsa/mcq?name=${encodeURIComponent(name)}`);
+  };
 
-
-return (
+  return (
     <div className="p-6">
-      <Table>
+      <Table className='bg-blue-200 rounded'>
         <TableCaption>25 Questions of the Day</TableCaption>
-        <TableHeader>
+        <TableHeader className='text-black-300'>
           <TableRow>
             <TableHead>Question</TableHead>
             <TableHead>Topic</TableHead>
             <TableHead>Problem Statement</TableHead>
             <TableHead>Link to Question</TableHead>
+            <TableHead>MCQs</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {data.coding_questions.map((q, index) => {
-            return (
-              <TableRow key={index}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{q.topic}</TableCell>
-                <TableCell className="font-medium">{q.name}</TableCell>
-                <TableCell>
-                  <a
-                    href={q.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 underline"
-                  >
-                    Open Link
-                  </a>
-                </TableCell>
-                <TableCell>
-                    <Button onClick={()=>handleClick(q.name)}>
-              See MCQs
-            </Button>
-                </TableCell>
-              </TableRow>
-            );
-          })}
+        <TableBody className='text-black'>
+          {data.coding_questions.map((q, index) => (
+            <TableRow key={index}>
+              <TableCell>{index + 1}</TableCell>
+              <TableCell>{q.topic}</TableCell>
+              <TableCell className="font-medium">{q.name}</TableCell>
+              <TableCell>
+                <a
+                  href={q.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-900 underline bg-black-100 rounded p-1"
+                >
+                  Open Link
+                </a>
+              </TableCell>
+              <TableCell>
+                <Button onClick={() => handleClick(q.name)}>See MCQs</Button>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>
