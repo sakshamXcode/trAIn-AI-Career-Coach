@@ -57,9 +57,9 @@ const DsaRevision = () => {
 
   return (
     <div className="p-6">
-      <Table className='bg-blue-200 rounded'>
+      <Table className='bg-blue-100 rounded'>
         <TableCaption>25 Questions of the Day</TableCaption>
-        <TableHeader className='text-black-300'>
+        <TableHeader className='text-black-900'>
           <TableRow>
             <TableHead>Question</TableHead>
             <TableHead>Topic</TableHead>
