@@ -80,6 +80,12 @@ const Header = async () => {
                     <span>Interview Prep</span>
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/dsa" className="flex items-center gap-2">
+                    <GraduationCap className="h-4 w-4" />
+                    <span>DSA Revision</span>
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </SignedIn>
