@@ -128,24 +128,29 @@ const McqQuestions = () => {
             ⬅️ Previous
           </Button>
 
-          <Button
-            onClick={() => setCheckedIndex(currentIndex)}
-            disabled={selectedOption === null}
-          >
-            ✅ Check
-          </Button>
-
-          <Button
-            variant="outline"
-            disabled={currentIndex === data.length - 1}
-            onClick={() => {
-              setCheckedIndex(null);
-              setSelectedOption(null);
-              setCurrentIndex((prev) => prev + 1);
-            }}
-          >
-            Next ➡️
-          </Button>
+          {/* Only show Check button if not checked, otherwise show Next button */}
+          {!isChecked ? (
+            <Button
+              onClick={() => setCheckedIndex(currentIndex)}
+              disabled={selectedOption === null}
+              className="transition-colors"
+            >
+              ✅ Check
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              disabled={currentIndex === data.length - 1}
+              onClick={() => {
+                setCheckedIndex(null);
+                setSelectedOption(null);
+                setCurrentIndex((prev) => prev + 1);
+              }}
+              className="transition-colors"
+            >
+              Next ➡️
+            </Button>
+          )}
         </div>
       </div>
 

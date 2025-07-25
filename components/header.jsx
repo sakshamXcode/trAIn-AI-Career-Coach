@@ -1,3 +1,5 @@
+"use client";
+
 import {
   SignedIn,
   SignedOut,
@@ -15,8 +17,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import  {Button}  from "./ui/button";
- import { checkUser } from "@/lib/checkUser";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,8 +28,9 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-const Header = async () => {
-   await checkUser();
+
+const Header = () => {
+  const router = useRouter();
   return (
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
       {/* look at the header tailwind u will see a lot comes frrom shadcn-tailwind */}
@@ -59,32 +62,21 @@ const Header = async () => {
               <DropdownMenuContent>
                 <DropdownMenuLabel>Momentum Drivers</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Link href="/resume" className="flex items-center gap-2">
-                    <FileText className="h-4 w-4" />
-                    <span>Resume Builder</span>
-                  </Link>
+                <DropdownMenuItem onSelect={() => router.push("/resume")}> 
+                  <FileText className="h-4 w-4" />
+                  <span>Resume Builder</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link
-                    href="/ai-cover-letter"
-                    className="flex items-center gap-2"
-                  >
-                    <PenBox className="h-4 w-4" />
-                    <span>AI-Cover Letter</span>
-                  </Link>
+                <DropdownMenuItem onSelect={() => router.push("/ai-cover-letter")}> 
+                  <PenBox className="h-4 w-4" />
+                  <span>AI-Cover Letter</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/interview" className="flex items-center gap-2">
-                    <GraduationCap className="h-4 w-4" />
-                    <span>Interview Prep</span>
-                  </Link>
+                <DropdownMenuItem onSelect={() => router.push("/interview")}> 
+                  <GraduationCap className="h-4 w-4" />
+                  <span>Interview Prep</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/dsa" className="flex items-center gap-2">
-                    <GraduationCap className="h-4 w-4" />
-                    <span>DSA Revision</span>
-                  </Link>
+                <DropdownMenuItem onSelect={() => router.push("/dsa")}> 
+                  <GraduationCap className="h-4 w-4" />
+                  <span>DSA Revision</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

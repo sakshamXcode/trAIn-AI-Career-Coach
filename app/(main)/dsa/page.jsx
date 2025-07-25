@@ -1,10 +1,12 @@
 import React from 'react'
-import DsaRevision from './_components/questions'
+import DsaRevision, { DsaQuestionsProvider } from './_components/questions'
 const McqPage = () => {
   return (
-    <div>
-      <DsaRevision/>
-    </div>
+    <DsaQuestionsProvider>
+      <div>
+        <DsaRevision/>
+      </div>
+    </DsaQuestionsProvider>
   )
 }
 

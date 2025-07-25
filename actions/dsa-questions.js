@@ -68,36 +68,37 @@ export async function generateMCQQuestions(name) {
   if (!user) throw new Error("User not found");
 
   console.log(name);
-const prompt = `
-You are a coding assistant helping users revise the underlying concepts of a Data Structures and Algorithms (DSA) problem. Based on the question title provided below, your task is to generate **5 multiple-choice questions (MCQs)** that reinforce core algorithmic ideas and provide an external study link for each.
-
-### Input:
-{
-  "name": "${name}"
-}
-
-### Guidelines:
-- Focus on **DSA patterns**, **time/space complexity**, **edge cases**, or **common mistakes** related to the problem.
-- MCQs must be **non-repetitive**, clear, and useful for concept reinforcement.
-- Include a **relevant external study link** for each MCQ pointing to GeeksforGeeks, LeetCode Explore, or similar trusted sources.
-- The link should match the MCQ topic as precisely as possible.
-- Ensure the answer matches **exactly** with one of the options (case-sensitive).
-- Output only valid JSON. Do not include any markdown, code blocks, or explanations.
-
-### Output Format:
-{
-  "concept_revision": [
-    {
-      "question": "Which data structure is ideal for solving the Two Sum problem?",
-      "options": ["Array", "HashMap", "Stack", "Queue"],
-      "answer": "HashMap",
-      "study_link": "https://www.geeksforgeeks.org/two-sum-problem/"
-    },
-    ...
-    // 5 total MCQs
-  ]
-}
-`;
+  const prompt = `
+  You are a coding assistant that helps users strengthen their understanding of Data Structures and Algorithms (DSA) by generating concept-based quiz questions. Given a DSA problem title as input, generate **5 fresh multiple-choice questions (MCQs)** that reinforce key algorithmic concepts.
+  
+  ### Input:
+  {
+    "name": "${name}"
+  }
+  
+  ### Requirements:
+  - Each MCQ should test a **distinct concept** relevant to the problem (e.g., algorithm design, edge cases, data structure use, complexity analysis, common pitfalls).
+  - Avoid repeating questions for the same problem. Ensure **diversity and freshness** across runs and days.
+  - Include an **external study link** (GeeksforGeeks, LeetCode Explore, or similar) that directly relates to the concept being tested.
+  - Each question must have **exactly one correct answer** from the options (case-sensitive).
+  - Questions should be **clear, useful, and non-trivial**, avoiding superficial facts.
+  - Output must be **strictly valid JSON**. Do not include any explanations, markdown, or formatting.
+  
+  ### Output Format:
+  {
+    "concept_revision": [
+      {
+        "question": "Which data structure is most optimal for solving the Two Sum problem in linear time?",
+        "options": ["Array", "HashMap", "Set", "LinkedList"],
+        "answer": "HashMap",
+        "study_link": "https://www.geeksforgeeks.org/two-sum-problem/"
+      },
+      ...
+      // Total of 5 MCQs
+    ]
+  }
+  `;
+  
 
   try {
     const results = await model.generateContent(prompt);
